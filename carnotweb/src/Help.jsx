@@ -16,6 +16,23 @@ import img16 from './assets/img 16.png';
 import img17 from './assets/img 17.png';
 
 const UserManual = () => {
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || 'light';
+  });
+
+  // Effect to handle theme changes
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  // Theme toggle handler
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
   // Slideshow state and configuration
   const slideshowImages = [
     { src: img1, alt: "Add the Knowlegde container " },
@@ -53,6 +70,9 @@ const UserManual = () => {
 
   return (
     <div className="user-manual">
+      <button className="theme-toggle" onClick={toggleTheme} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+        {theme === 'light' ? '🌙' : '☀️'} {theme === 'light' ? 'Dark' : 'Light'} Mode
+      </button>
       <div className="container">
         <h1>User Manual for iCarKno Chat</h1>
         

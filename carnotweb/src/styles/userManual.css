@@ -1,3 +1,24 @@
+/* Theme Variables */
+body {
+  --background-primary: #f5f5f5;
+  --background-secondary: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #444444;
+  --accent-color: #3498db;
+  --border-color: #e1e8ed;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme='dark'] {
+  --background-primary: #000000;
+  --background-secondary: #121212;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --accent-color: #3498db;
+  --border-color: #333333;
+  --shadow-color: rgba(255, 255, 255, 0.05);
+}
+
 /* Base Styles */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -10,12 +31,14 @@ html {
 body {
   margin: 0;
   padding: clamp(0.5rem, 2vw, 1rem);
-  background: #f5f5f5;
+  background: var(--background-primary);
+  color: var(--text-primary);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .user-manual {
@@ -25,60 +48,117 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
   align-items: center;
   padding: clamp(1rem, 5vw, 3rem);
   box-sizing: border-box;
-  background: white;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  background: var(--background-secondary);
+  box-shadow: 0 0 30px var(--shadow-color);
   border-radius: 12px;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  box-shadow: 0 0 20px var(--shadow-color);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Typography */
 .user-manual h1 {
   margin-bottom: clamp(1rem, 4vw, 2rem);
   font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: #2c3e50;
+  color: var(--text-primary);
   text-align: center;
-  border-bottom: 3px solid #3498db;
+  border-bottom: 3px solid var(--accent-color);
   padding-bottom: 0.5rem;
   width: 100%;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .user-manual h2 {
   margin-bottom: clamp(1rem, 3vw, 1.5rem);
   font-size: clamp(1.25rem, 3vw, 2rem);
-  color: #2c3e50;
+  color: var(--text-primary);
   text-align: center;
-  border-bottom: 2px solid #3498db;
+  border-bottom: 2px solid var(--accent-color);
   padding-bottom: 0.5rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .user-manual h3 {
   margin-top: clamp(1rem, 3vw, 1.5rem);
   margin-bottom: clamp(0.75rem, 2vw, 1rem);
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  color: #34495e;
-  border-left: 4px solid #3498db;
+  color: var(--text-primary);
+  border-left: 4px solid var(--accent-color);
   padding-left: 1rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .user-manual h4 {
   margin-top: clamp(0.8rem, 2vw, 1.2rem);
   margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #2c3e50;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .user-manual p {
   line-height: 1.8;
-  color: #444;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
 .user-manual strong {
-  color: #2c3e50;
+  color: var(--text-primary);
   font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* Links */
+.user-manual a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.user-manual a:hover {
+  filter: brightness(120%);
+  text-decoration: underline;
 }
 
 /* Lists */
@@ -90,13 +170,14 @@ body {
 .user-manual li {
   margin-bottom: 0.5rem;
   line-height: 1.6;
-  color: #444;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 /* Code/Instruction Blocks */
 .user-manual pre {
-  background: #2c3e50;
-  color: #ecf0f1;
+  background: var(--background-primary);
+  color: var(--text-primary);
   padding: clamp(0.75rem, 2vw, 1rem);
   border-radius: clamp(4px, 1vw, 8px);
   border-left: 4px solid #3498db;
@@ -170,48 +251,53 @@ body {
 
 /* Section Content */
 .section-content {
-  background: white;
+  background: var(--background-secondary);
+  color: var(--text-primary);
   padding: clamp(1rem, 4vw, 2.5rem);
   border-radius: clamp(8px, 2vw, 12px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px var(--shadow-color);
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
   transition: all 0.3s ease;
   width: 100%;
   max-width: min(90vw, 1000px);
+  border: 1px solid var(--border-color);
 }
 
 .section-content:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px var(--shadow-color);
   transform: translateY(-2px);
 }
 
 /* Hindi Section */
 .hindi-section {
-  border-top: 4px solid #3498db;
+  border-top: 4px solid var(--accent-color);
   margin-top: clamp(2rem, 4vw, 3rem);
-  background: #f8f9fa;
+  background: var(--background-secondary);
   padding-top: clamp(1rem, 3vw, 2rem);
+  color: var(--text-primary);
 }
 
 /* Image Containers */
 .image-container {
   margin: clamp(1rem, 3vw, 1.5rem) 0;
   text-align: center;
-  background: #f8f9fa;
+  background: var(--background-secondary);
   padding: clamp(0.5rem, 2vw, 1rem);
   border-radius: clamp(4px, 1vw, 8px);
-  border: 1px solid #e1e8ed;
+  border: 1px solid var(--border-color);
   width: 100%;
   max-width: min(90vw, 800px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .image-container img {
   max-width: 100%;
   height: auto;
   border-radius: clamp(4px, 1vw, 8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   object-fit: contain;
+  background: var(--background-secondary);
 }
 
 .image-container img:hover {
