@@ -14,6 +14,9 @@ import img14 from './assets/img 14.png';
 import img15 from './assets/img 15.png';
 import img16 from './assets/img 16.png';
 import img17 from './assets/img 17.png';
+import img21 from './assets/img21.png';
+import img20 from './assets/img20.png';
+import img25 from './assets/img25.png';
 
 const UserManual = () => {
   // Theme state
@@ -289,7 +292,23 @@ const UserManual = () => {
               <strong>Opinion-based Query:</strong> "Is X better than Y? Why do you think so?"
             </li>
           </ul>
-        </div>
+
+         <h4>To switch between Light and Dark mode:</h4>
+          <p>
+            Click on the top-right moon icon button to switch to dark mode and
+            click on the sun icon in dark mode to switch back to light mode.
+          </p> </div>
+          <div className="image-container">
+            <img src={img20} alt="Dark mode icon" />
+          </div>
+            <div className="image-container">
+            <img src={img21} alt="Dark mode icon" />
+          </div>
+  <div className="image-container">
+            <img src={img25} alt="Dark mode icon" />
+          </div>
+          
+       
 
         <div className="section-content hindi-section">
           <h2>हिंदी में यूजर मैन्युअल</h2>
@@ -378,6 +397,15 @@ const UserManual = () => {
             </li>
           </ul>
         </div>
+         <div className="image-container">
+            <img src={img20} alt="Dark mode icon" />
+          </div>
+            <div className="image-container">
+            <img src={img21} alt="Dark mode icon" />
+          </div>
+  <div className="image-container">
+            <img src={img25} alt="Dark mode icon" />
+          </div>
       </div>
     </div>
   );
